@@ -1,7 +1,6 @@
 """Custom filters for jinja2 templates."""
 import datetime
 import re
-from typing import Union
 
 import jinja2
 
