@@ -8,13 +8,13 @@ import jinja2
 import jsonschema
 import weasyprint
 
-from py_jsonresume import filters
+from py_great_resume import filters
 
 
 LOGGER = logging.getLogger(__name__)
 
 
-class JsonResume:
+class Resume:
 
     def __init__(self, data_fpath: str, *, template: str = "long"):
         self.env = self._init_environment()
@@ -23,7 +23,7 @@ class JsonResume:
 
     def _init_environment(self) -> jinja2.Environment:
         env = jinja2.Environment(
-            loader=jinja2.PackageLoader("py_jsonresume", "templates"),
+            loader=jinja2.PackageLoader("py_great_resume", "templates"),
             autoescape=True,
             trim_blocks=True,
             lstrip_blocks=True,

@@ -1,13 +1,13 @@
 import argparse
 import pathlib
 
-import py_jsonresume
+import py_great_resume
 
 
 def add_and_parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-        description="command line interface for py_jsonresume",
+        description="command line interface for py_great_resume",
     )
     parser.add_argument(
         "--src_fpath", type=pathlib.Path, required=True,
@@ -38,10 +38,10 @@ def add_and_parse_args() -> argparse.Namespace:
 
 if __name__ == "__main__":
     args = add_and_parse_args()
-    jr = py_jsonresume.JsonResume(str(args.src_fpath), template=args.template)
+    resume = py_great_resume.Resume(str(args.src_fpath), template=args.template)
     if args.validate is True:
-        jr.validate(schema=args.schema_url)
+        resume.validate(schema=args.schema_url)
     if args.tgt_fpath.suffix == ".html":
-        jr.to_html(args.tgt_fpath)
+        resume.to_html(args.tgt_fpath)
     if args.tgt_fpath.suffix == ".pdf":
-        jr.to_pdf(args.tgt_fpath)
+        resume.to_pdf(args.tgt_fpath)

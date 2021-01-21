@@ -1,1 +1,1 @@
-from .jsonresume import JsonResume
+from .resume import Resume
