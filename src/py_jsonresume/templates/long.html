@@ -1,257 +1,365 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
     <head>
+        <title>{{ basics.name }}'s Résumé</title>
         <meta charset="utf-8">
-        <title>{{ basics.name }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik|Spectral">
+        <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+        <style>
+            body {
+                color: #303030;
+                background: #EEEEEE;
+                font-family: "Rubik", sans-serif;
+                font-size: medium;
+                line-height: 1.3;
+                margin: 30px 0;
+            }
+            #resume {
+                margin: 0 auto;
+                max-width: 800px;
+                padding: 30px 60px;
+                background: #FFFFFF;
+                border: 1px solid #CCCCCC;
+                box-shadow: 2px 2px 4px #AAAAAA;
+                -webkit-box-shadow: 2px 2px 4px #AAAAAA;
+            }
+            h1, h2, h3 {font-family: "Spectral", serif;}
+            h1 {
+                text-align: center;
+                font-size: 200%;
+                font-variant: small-caps;
+                margin: 0;
+                padding: 0;
+            }
+            h2 {font-size: 150%;}
+            h3 {font-size: 125%;}
+            a {
+                color: #4292c6;
+                text-decoration: none;
+                font-weight: 400;
+            }
+            a:hover {text-decoration: underline;}
+            code {
+                font-family: Courier, monospace;
+                padding: 0 2px;
+            }
+            section > ul {padding: 0 0 0 20px}
+            section > ul > li {margin: 0 0 0.5em 0;}
+            section > ul > li > p {margin: 0.25em 0 0 0;}
+            section > ul > li > div > span:not(:last-child):after {content: " \2022 ";}
+            #basics > ul {
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+            #basics > ul > li {
+                display: inline;
+                white-space: pre;
+                list-style-type: none;
+            }
+            #basics > ul > li:not(:last-child):after {content: " \2022 ";}
+            #skills > ul > li > span:not(:last-child):after {content: "; ";}
+            #skills > ul > li > span:first-child:after {content: ": ";}
+            #publications > ul > li > span:not(:last-child):after {content: ". "}
+            #awards > ul > li > span:after {content: ". "}
+            .section-header {
+                font-variant: small-caps;
+                border-bottom: 1px solid #303030;
+                margin: 0.8em 0 0.5em 0;
+            }
+            .item-list {
+                margin: 0 0 1.0em 0;
+                padding: 0 0 0 0;
+            }
+            .item {
+                list-style-type: none;
+                margin: 0 0 1.0em 0;
+            }
+            .item-header {
+                margin: 0.5em 0 0.25em 0;
+                padding: 0;
+                display: flex;
+                justify-content: space-between;
+            }
+            .skill-name {font-weight: bold;}
+            .publication-name {font-style: italic;}
+            .award-name {font-style: italic;}
+        </style>
     </head>
 
     <body>
+        <div id="resume">
 
-        <header id="name">
-            <h1>{{ basics.name }}</h1>
-        </header>
-
-        <section id="basics">
-            <div id="basics-contact">
-                {% if basics.email %}
-                <a href="mailto:{{ basics.email }}">{{ basics.email }}</a>
-                {% endif %}
-                {% if basics.phone %}
-                <span>{{ basics.phone }}</span>
-                {% endif %}
-                {% if basics.location %}
-                <span>{{ basics.location.city }}, {{ basics.location.region }}</span>
-                {% endif %}
-            </div>
-            {% if basics.profiles %}
-            <div id="basics-profiles">
-            {% for profile in basics.profiles %}
-                <a href="{{ profile.url }}">{{ profile.network }}</a>
-            {% endfor %}
-            </div>
-            {% endif %}
-        </section>
-
-        {% if skills %}
-        <section id="skills">
-            <h2 class="section-header">Skills</h2>
-            <ul>
-                {% for skill in skills %}
-                <li>
-                    <strong>{{ skill.name }}: </strong>
-                    <span>{{ skill.keywords | join("; ") }}</span>
-                </li>
+            <section id="basics">
+                <h1>{{ basics.name }}</h1>
+                <ul>
+                    {% if basics.email %}
+                    <li><a href="mailto:{{ basics.email }}">{{ basics.email }}</a></li>
+                    {% endif %}
+                    {% if basics.phone %}
+                    <li>{{ basics.phone }}</li>
+                    {% endif %}
+                    {% if basics.location %}
+                    <li>{{ basics.location.city }}, {{ basics.location.region }}</li>
+                    {% endif %}
+                </ul>
+                {% if basics.profiles %}
+                <ul>
+                {% for profile in basics.profiles %}
+                    <li><a href="{{ profile.url }}">{{ profile.network }}</a></li>
                 {% endfor %}
-            </ul>
-        </section>
-        {% endif %}
+                </ul>
+                {% endif %}
+                {% if basics.summary %}
+                <p>{{ basics.summary }}</p>
+                {% endif %}
+            </section>
 
-        {% if work %}
-        <section id="work">
-            <h2 class="section-header">Work Experience</h2>
-            {% for item in work %}
-            <h3 class="subsection-header">
-                <span class="subsection-header-name">{{ item.position }}</span>
-                {% if item.startDate or item.endDate %}
-                <span class="subsection-header-date">
-                    {% if item.startDate %}
-                    <time datetime={{ item.startDate }}>{{ item.startDate }}</time>
-                    {% endif %}
-                    {% if item.startDate and item.endDate %}
-                    <span>–</span>
-                    {% endif %}
-                    {% if item.endDate %}
-                    <time datetime={{ item.endDate }}>{{ item.endDate }}</time>
-                    {% endif %}
-                {% endif %}
-            </h3>
-            <div>
-                {% if item.url %}
-                <a href="{{ item.url }}">{{ item.name }}</a>
-                {% else %}
-                <span>{{ item.name }}</span>
-                {% endif %}
-                {% if item.location %}
-                <span>; {{ item.location }}</span>
-                {% endif %}
-            </div>
-            {% if item.summary %}
-            <p>{{ item.summary }}</p>
+            {% if skills %}
+            <section id="skills">
+                <h2 class="section-header">Skills</h2>
+                <ul>
+                    {% for skill in skills %}
+                    <li>
+                        <span class="skill-name">{{ skill.name }}</span>
+                        {% for keyword in skill.keywords %}
+                        <!-- <span>{{ keyword }}</span> -->
+                        <span>{{ keyword | handle_md_inline_code}}</span>
+                        {% endfor %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
             {% endif %}
-            {% if item.highlights %}
-            <ul>
-                {% for highlight in item.highlights %}
-                <li>{{ highlight }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% endfor %}
-        </section>
-        {% endif %}
 
-        {% if volunteer %}
-        <section id="volunteer">
-            <h2 class="section-header">Volunteer Experience</h2>
-            {% for item in volunteer %}
-            <h3 class="subsection-header">
-                <span class="subsection-header-name">{{ item.position }}</span>
-                {% if item.startDate or item.endDate %}
-                <span class="subsection-header-date">
-                    {% if item.startDate %}
-                    <time datetime={{ item.startDate }}>{{ item.startDate }}</time>
-                    {% endif %}
-                    {% if item.startDate and item.endDate %}
-                    <span>–</span>
-                    {% endif %}
-                    {% if item.endDate %}
-                    <time datetime={{ item.endDate }}>{{ item.endDate }}</time>
-                    {% endif %}
-                {% endif %}
-            </h3>
-            <div>
-                {% if item.url %}
-                <a href="{{ item.url }}">{{ item.organization }}</a>
-                {% else %}
-                <span>{{ item.organization }}</span>
-                {% endif %}
-                {% if item.location %}
-                <span>; {{ item.location }}</span>
-                {% endif %}
-            </div>
-            {% if item.summary %}
-            <p>{{ item.summary }}</p>
+            {% if work %}
+            <section id="work">
+                <h2 class="section-header">Work Experience</h2>
+                <ul class="item-list">
+                    {% for item in work %}
+                    <li class="item">
+                        <h3 class="item-header">
+                            <span>{{ item.position }}</span>
+                            {% if item.startDate or item.endDate %}
+                            <span>
+                                {% if item.startDate %}
+                                <time datetime={{ item.startDate }}>{{ item.startDate | datetime_format("%b %Y") }}</time>
+                                {% endif %}
+                                {% if item.startDate and item.endDate %}
+                                <span>–</span>
+                                {% endif %}
+                                {% if item.endDate %}
+                                <time datetime={{ item.endDate }}>{{ item.endDate  | datetime_format("%b %Y") }}</time>
+                                {% endif %}
+                            {% endif %}
+                        </h3>
+                        <div>
+                            {% if item.url %}
+                            <span><a href="{{ item.url }}">{{ item.name }}</a></span>
+                            {% else %}
+                            <span>{{ item.name }}</span>
+                            {% endif %}
+                            {% if item.location %}
+                            <span>{{ item.location }}</span>
+                            {% endif %}
+                        </div>
+                        {% if item.summary %}
+                        <p>{{ item.summary }}</p>
+                        {% endif %}
+                        {% if item.highlights %}
+                        <ul>
+                            {% for highlight in item.highlights %}
+                            <li>{{ highlight }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
             {% endif %}
-            {% if item.highlights %}
-            <ul>
-                {% for highlight in item.highlights %}
-                <li>{{ highlight }}</li>
-                {% endfor %}
-            </ul>
+
+            {% if volunteer %}
+            <section id="volunteer">
+                <h2 class="section-header">Volunteer Experience</h2>
+                <ul class="item-list">
+                    {% for item in volunteer %}
+                    <li class="item">
+                        <h3 class="item-header">
+                            <span>{{ item.position }}</span>
+                            {% if item.startDate or item.endDate %}
+                            <span>
+                                {% if item.startDate %}
+                                <time datetime={{ item.startDate }}>{{ item.startDate | datetime_format("%b %Y") }}</time>
+                                {% endif %}
+                                {% if item.startDate and item.endDate %}
+                                <span>–</span>
+                                {% endif %}
+                                {% if item.endDate %}
+                                <time datetime={{ item.endDate }}>{{ item.endDate | datetime_format("%b %Y") }}</time>
+                                {% endif %}
+                            {% endif %}
+                        </h3>
+                        <div>
+                            {% if item.url %}
+                            <span><a href="{{ item.url }}">{{ item.organization }}</a></span>
+                            {% else %}
+                            <span>{{ item.organization }}</span>
+                            {% endif %}
+                            {% if item.location %}
+                            <span>{{ item.location }}</span>
+                            {% endif %}
+                        </div>
+                        {% if item.summary %}
+                        <p>{{ item.summary }}</p>
+                        {% endif %}
+                        {% if item.highlights %}
+                        <ul>
+                            {% for highlight in item.highlights %}
+                            <li>{{ highlight }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
             {% endif %}
-            {% endfor %}
-        </section>
-        {% endif %}
 
-        {% if projects %}
-        <section id="projects">
-            <h2 class="section-header">Projects</h2>
-            {% for item in projects %}
-            <h3 class="subsection-header">
-                <span class="subsection-header-name">{{ item.name }}</span>
-                {% if item.startDate or item.endDate %}
-                <span class="subsection-header-date">
-                    {% if item.startDate %}
-                    <time datetime={{ item.startDate }}>{{ item.startDate }}</time>
-                    {% endif %}
-                    {% if item.startDate and item.endDate %}
-                    <span>–</span>
-                    {% endif %}
-                    {% if item.endDate %}
-                    <time datetime={{ item.endDate }}>{{ item.endDate }}</time>
-                    {% endif %}
-                {% endif %}
-            </h3>
-            {% if item.description %}
-            <p>{{ item.description }}</p>
+            {% if projects %}
+            <section id="projects">
+                <h2 class="section-header">Projects</h2>
+                <ul class="item-list">
+                    {% for item in projects %}
+                    <li class="item">
+                        <h3 class="item-header">
+                            {% if item.url %}
+                            <a href="{{ item.url }}">{{ item.name }}</a>
+                            {% else %}
+                            <span>{{ item.name }}</span>
+                            {% endif %}
+                            {% if item.startDate or item.endDate %}
+                            <span>
+                                {% if item.startDate %}
+                                <time datetime={{ item.startDate }}>{{ item.startDate | datetime_format("%b %Y") }}</time>
+                                {% endif %}
+                                {% if item.startDate and item.endDate %}
+                                <span>–</span>
+                                {% endif %}
+                                {% if item.endDate %}
+                                <time datetime={{ item.endDate }}>{{ item.endDate | datetime_format("%b %Y") }}</time>
+                                {% endif %}
+                            {% endif %}
+                        </h3>
+                        {% if item.description %}
+                        <p>{{ item.description }}</p>
+                        {% endif %}
+                        {% if item.highlights %}
+                        <ul>
+                            {% for highlight in item.highlights %}
+                            <li>{{ highlight }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
             {% endif %}
-            {% if item.highlights %}
-            <ul>
-                {% for highlight in item.highlights %}
-                <li>{{ highlight }}</li>
-                {% endfor %}
-            </ul>
+
+            {% if education %}
+            <section id="education">
+                <h2 class="section-header">Education</h2>
+                <ul class="item-list">
+                    {% for item in education %}
+                    <li class="item">
+                        <h3 class="item-header">
+                            <span>{{ item.studyType }} in {{ item.area }}</span>
+                            {% if item.startDate or item.endDate %}
+                            <span>
+                                {% if item.startDate %}
+                                <time datetime={{ item.startDate }}>{{ item.startDate | datetime_format("%Y") }}</time>
+                                {% endif %}
+                                {% if item.startDate and item.endDate %}
+                                <span>–</span>
+                                {% endif %}
+                                {% if item.endDate %}
+                                <time datetime={{ item.endDate }}>{{ item.endDate | datetime_format("%Y") }}</time>
+                                {% endif %}
+                            {% endif %}
+                        </h3>
+                        <div>
+                            {% if item.url %}
+                            <span><a href="{{ item.url }}">{{ item.institution }}</a></span>
+                            {% else %}
+                            <span>{{ item.institution }}</span>
+                            {% endif %}
+                            {% if item.location %}
+                            <span>{{ item.location }}</span>
+                            {% endif %}
+                        </div>
+                        {% if item.courses %}
+                        <ul>
+                            {% for course in item.courses %}
+                            <li>{{ course }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
             {% endif %}
-            {% endfor %}
-        </section>
-        {% endif %}
 
-        {% if education %}
-        <section id="education">
-            <h2 class="section-header">Education</h2>
-            {% for item in education %}
-            <h3 class="subsection-header">
-                <span>{{ item.studyType }} in {{ item.area }}</span>
-                {% if item.startDate or item.endDate %}
-                <span class="subsection-header-date">
-                    {% if item.startDate %}
-                    <time datetime={{ item.startDate }}>{{ item.startDate }}</time>
-                    {% endif %}
-                    {% if item.startDate and item.endDate %}
-                    <span>–</span>
-                    {% endif %}
-                    {% if item.endDate %}
-                    <time datetime={{ item.endDate }}>{{ item.endDate }}</time>
-                    {% endif %}
-                {% endif %}
-            </h3>
-            <div>
-                {% if item.url %}
-                <a href="{{ item.url }}">{{ item.institution }}</a>
-                {% else %}
-                <span>{{ item.institution }}</span>
-                {% endif %}
-                {% if item.location %}
-                <span>; {{ item.location }}</span>
-                {% endif %}
-            </div>
-            {% if item.courses %}
-            <ul>
-                {% for course in item.courses %}
-                <li>{{ course }}</li>
-                {% endfor %}
-            </ul>
+            {% if publications %}
+            <section id="publications">
+                <h2 class="section-header">Publications</h2>
+                <ul>
+                    {% for item in publications %}
+                    <li>
+                        <span class="publication-name">{{ item.name }}</span>
+                        {% if item.publisher %}
+                        <span>{{ item.publisher }}</span>
+                        {% endif %}
+                        {% if item.releaseDate %}
+                        <span><time datetime={{ item.releaseDate }}>{{ item.releaseDate | datetime_format("%Y") }}</time></span>
+                        {% endif %}
+                        {% if item.url %}
+                        <span>(<a href="{{ item.url }}">link</a>)</span>
+                        {% endif %}
+                        {% if item.summary %}
+                        <p>{{ item.summary }}</p>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
             {% endif %}
-            {% endfor %}
-        </section>
-        {% endif %}
 
-        {% if publications %}
-        <section id="publications">
-            <h2 class="section-header">Publications</h2>
-            <ul>
-                {% for item in publications %}
-                <li>
-                    <span class="publication-name">{{ item.name }}</span>
-                    {% if item.publisher %}
-                    <span>{{ item.publisher }}</span>
-                    {% endif %}
-                    {% if item.releaseDate %}
-                    <time datetime={{ item.releaseDate }}>{{ item.releaseDate }}</time>
-                    {% endif %}
-                    {% if item.url %}
-                    <a href="{{ item.url }}">(link)</a>
-                    {% endif %}
-                    {% if item.summary %}
-                    <p>{{ item.summary }}</p>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-        </section>
-        {% endif %}
+            {% if awards %}
+            <section id="awards">
+                <h2 class="section-header">Awards</h2>
+                <ul>
+                    {% for item in awards %}
+                    <li>
+                        <span class="award-name">{{ item.title }}</span>
+                        {% if item.date %}
+                        <span><time datetime={{ item.date }}>{{ item.date | datetime_format("%Y") }}</time></span>
+                        {% endif %}
+                        {% if item.awarder %}
+                        <span>{{ item.awarder }}</span>
+                        {% endif %}
+                        {% if item.summary %}
+                        <p>{{ item.summary }}</p>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+            {% endif %}
 
-        {% if awards %}
-        <section id="awards">
-            <h2 class="section-header">Awards</h2>
-            <ul>
-                {% for item in awards %}
-                <li>
-                    <span class="award-name">{{ item.title }}</span>
-                    {% if item.date %}
-                    <time datetime={{ item.date }}>{{ item.date }}</time>
-                    {% endif %}
-                    {% if item.awarder %}
-                    <span>{{ item.awarder }}</span>
-                    {% endif %}
-                    {% if item.summary %}
-                    <p>{{ item.summary }}</p>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-        </section>
-        {% endif %}
-
+        </div>
     </body>
 </html>
