@@ -86,6 +86,48 @@
             .skill-name {font-weight: bold;}
             .publication-name {font-style: italic;}
             .award-name {font-style: italic;}
+            @media print {
+                body {
+                    font-size: 10pt;
+                    margin: 0;
+                    padding: 0;
+                    background: none;
+                }
+                #resume {
+                    margin: 0;
+                    padding: 0;
+                    border: 0px;
+                    background: none;
+                    box-shadow: none;
+                    -webkit-box-shadow: none;
+                }
+                a, a:link, a:visited, a:hover {
+                    color: #303030;
+                    text-decoration: underline;
+                }
+            }
+            @page {
+                /* Change margins and paper size of PDF */
+                /* https://developer.mozilla.org/en-US/docs/Web/CSS/@page */
+                size: letter;
+                margin: 0.4in 0.8in;
+            }
+            @media screen and (max-width: 800px) {
+                body {
+                    font-size: 16pt;
+                    margin: 0;
+                    padding: 0;
+                    background: #FFFFFF !important;
+                }
+                #resume {
+                    margin: 0;
+                    padding: 1em;
+                    border: 0px;
+                    background: none;
+                    box-shadow: none;
+                    -webkit-box-shadow: none;
+                }
+            }
         </style>
     </head>
 
