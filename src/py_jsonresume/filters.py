@@ -3,6 +3,8 @@ import datetime
 import re
 from typing import Union
 
+import jinja2
+
 
 RE_MD_INLINE_CODE = re.compile(r"(`)([\w-]+)(`)", flags=re.IGNORECASE)
 

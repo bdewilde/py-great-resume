@@ -32,11 +32,11 @@ class JsonResume:
         return data
 
     def to_html(self, fpath: str):
-        html_str = self.template.render(data)
+        html_str = self.template.render(self.data)
         with io.open(fpath, mode="wt") as f:
-            f.write(html)
+            f.write(html_str)
 
     def to_pdf(self, fpath: str):
-        html_str = self.template.render(data)
+        html_str = self.template.render(self.data)
         html = weasyprint.HTML(string=html_str)
         html.write_pdf(fpath)
