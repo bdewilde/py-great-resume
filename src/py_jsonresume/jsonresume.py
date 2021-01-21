@@ -1,7 +1,7 @@
 import io
 import json
 import logging
-import urllib.requests
+import urllib.request
 from typing import Any, Dict, Optional, Union
 
 import jinja2
@@ -48,7 +48,7 @@ class JsonResume:
             jsonschema.validate(self.data, schema)
             LOGGER.info("resume JSON data is valid!")
         except (jsonschema.ValidationError, jsonschema.SchemaError):
-            LOGGER.exception()
+            LOGGER.exception("unable to validate JSON data")
             raise
 
     def to_html(self, fpath: str):
