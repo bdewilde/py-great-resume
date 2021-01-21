@@ -15,6 +15,22 @@ LOGGER = logging.getLogger(__name__)
 
 
 class Resume:
+    """
+    Class for loading a resume from JSON, validating it against a schema, and
+    exporting it to HTML or PDF.
+
+    .. code-block:: pycon
+
+        >>> resume = py_great_resume.Resume("/path/to/resume.json", template="long")
+        >>> resume.validate()
+        >>> resume.to_pdf("/path/to/resume.pdf")
+        >>> resume.to_html("/path/to/resume.html")
+
+    Source resume data is expected to follow the `JSON Resume <https://jsonresume.org>`_
+    schema. According to `JSON Schema <http://json-schema.org/>`_, it's best practice
+    to embed a link to the schema specification within the source data itself using
+    a top-level ``"$schema"`` field. This field is used by :meth:`Resume.validate()`.
+    """
 
     def __init__(self, data_fpath: str, *, template: str = "long"):
         self.env = self._init_environment()
