@@ -1,2 +1,2 @@
-# py_jsonresume
+# py-great-resume
 TODO
