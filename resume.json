@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
     "basics": {
         "name": "Burton DeWilde",
         "label": "data scientist and engineer for social good",
@@ -33,19 +34,19 @@
     "work": [
         {
             "name": "Chartbeat, Inc.",
-            "location": "New York, NY",
-            "position": "Senior Data Scientist",
             "url": "https://chartbeat.com",
+            "_location": "New York, NY",
+            "position": "Senior Data Scientist",
             "startDate": "2015-09-01",
-            "endDate": "2014-01-01",
+            "endDate": "2021-01-01",
             "summary": "Developed data products and performed data analyses to provide critical insights used by online publishers around the world. Designed, implemented, and maintained multiple data systems operating at web scale to power key product features; applied novel statistical analysis and machine learning to web content, engagement, and audience datasets to answer new questions and solve new problems for journalists and editors; developed internal tools used widely by both the data science and backend engineering teams in day-to-day work; scoped and led consulting-style data projects to empower internal stakeholders.",
             "highlights": []
         },
         {
             "name": "Harmony Institute",
-            "location": "New York, NY",
-            "position": "Data Scientist",
             "url": "https://harmonylabs.org",
+            "_location": "New York, NY",
+            "position": "Data Scientist",
             "startDate": "2012-12-01",
             "endDate": "2015-09-01",
             "summary": "Performed mixed-methods research and developed data products examining the social impact of narrative media. Built data pipelines powering an interactive web app; led adoption of new technology and quantitative methods in response to research questions; assisted with user research, conceptual frameworks, and UX design on multiple projects.",
@@ -55,8 +56,9 @@
     "volunteer": [
         {
             "organization": "DataKind",
-            "position": "DataCorps Volunteer, Data Ambassador, and Data Creative",
             "url": "https://www.datakind.org",
+            "_location": "New York, NY",
+            "position": "DataCorps Volunteer, Data Ambassador, Data Creative",
             "startDate": "2014-07-01",
             "endDate": "2020-01-01",
             "summary": "Scoped, implemented, and managed a variety of pro bono data science projects for mission-driven client organizations. Built out data acquisition and transformation pipelines; trained and validated machine learning models for both offline and production use; designed and implemented an extensive, public-facing web app to facilitate researchers' systematic reviews; produced a 50-page technical report on recidivism in the criminal justice system; led volunteer teams on both short- and long-term engagements.",
@@ -67,7 +69,7 @@
         {
             "institution": "Stony Brook University",
             "url": "https://www.stonybrook.edu",
-            "location": "Stony Brook, NY",
+            "_location": "Stony Brook, NY",
             "area": "Physics, Specialization in Elementary Particle Physics",
             "studyType": "Ph.D.",
             "startDate": "2007-08-01",
@@ -78,7 +80,7 @@
         {
             "institution": "Kalamazoo College",
             "url": "https://www.kzoo.edu",
-            "location": "Kalamazoo, MI",
+            "_location": "Kalamazoo, MI",
             "area": "Physics and Spanish, Minor in Applied Math",
             "studyType": "B.A.",
             "startDate": "2003-09-01",
@@ -95,8 +97,8 @@
                 "general programming",
                 "cloud computing",
                 "streaming data pipelines",
-                "database design and management",
-                "Python, git, Amazon Web Services, Apache Kafka, PostgreSQL, MongoDB, Elasticsearch"
+                "database and REST API design",
+                "Python, git, Amazon Web Services, Apache Kafka, PostgreSQL, MongoDB, Elasticsearch, `flask` and `fastapi`, `pytest`"
             ]
         },
         {
@@ -116,32 +118,33 @@
             "_level": "",
             "keywords": [
                 "project scoping and management",
-                "scrum and kanban",
-                "REST API design and implementation",
+                "product wireframing",
+                "user testing",
                 "technical writing",
-                "Jira, Balsamiq Wireframes, `flask` and `fastapi`, markdown and LaTeX"
+                "scrum and kanban",
+                "Jira, markdown and LaTeX, `streamlit`"
             ]
         }
     ],
     "projects": [
         {
-            "name": "`textacy`",
+            "name": "textacy",
             "url": "https://github.com/chartbeat-labs/textacy",
             "type": "open-source software",
             "roles": ["author", "maintainer"],
             "_entity": "Chartbeat, Inc.",
-            "startDate": "2016-02-01",
-            "endDate": "2021-01-01",
+            "_startDate": "2016-02-01",
+            "_endDate": "2021-01-01",
             "description": "Open-source Python package for natural language processing, built on and around spaCy. An early and unusually broad contribution to spaCy's ecosystem, with functionality for language identification, text preprocessing, information extraction, topic modeling, and more.",
             "highlights": []
         },
         {
-            "name": "`dragnet`",
+            "name": "dragnet",
             "url": "https://github.com/dragnet-org/dragnet",
             "type": "open-source software",
             "roles": ["contributor"],
-            "startDate": "2016-02-01",
-            "endDate": "2019-07-01",
+            "_startDate": "2016-02-01",
+            "_endDate": "2019-07-01",
             "description": "Open-source Python package for extracting an article's main body text from HTML documents using machine learning. Notable for its excellent run-time performance and, for a time, its classification accuracy. Still widely used to create text corpora from web-scraped datasets.",
             "highlights": []
         }
