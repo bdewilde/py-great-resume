@@ -38,10 +38,13 @@ def add_and_parse_args() -> argparse.Namespace:
 
 if __name__ == "__main__":
     args = add_and_parse_args()
-    resume = py_great_resume.Resume(str(args.src_fpath), template=args.template)
+    resume = py_great_resume.Resume(
+        str(args.src_fpath.resolve()),
+        template=args.template,
+    )
     if args.validate is True:
         resume.validate(schema=args.schema_url)
     if args.tgt_fpath.suffix == ".html":
-        resume.to_html(args.tgt_fpath)
+        resume.to_html(str(args.tgt_fpath.resolve()))
     if args.tgt_fpath.suffix == ".pdf":
-        resume.to_pdf(args.tgt_fpath)
+        resume.to_pdf(str(args.tgt_fpath.resolve()))
