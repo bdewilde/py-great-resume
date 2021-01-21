@@ -1,0 +1,1 @@
+from .jsonresume import JsonResume
