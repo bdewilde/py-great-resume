@@ -13,6 +13,11 @@ jobs:
       matrix:
         python-version: [3.7, 3.8, 3.9]
         os: [macos-latest, ubuntu-latest]  # windows-latest
+        include:
+          - os: macos-latest
+            INSTALL_BREW_DEPS: brew install cairo pango gdk-pixbuf libffi
+            CC: clang
+            CXX: clang++
 
     steps:
     - uses: actions/checkout@v2
@@ -20,6 +25,8 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: install homebrew dependencies
+      run: ${{ matrix.INSTALL_BREW_DEPS }}
     - name: get pip cache dir
       id: pip-cache
       run: |
