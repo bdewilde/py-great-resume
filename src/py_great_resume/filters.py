@@ -5,7 +5,7 @@ import re
 import jinja2
 
 
-RE_MD_INLINE_CODE = re.compile(r"(`)([\w-]+)(`)", flags=re.IGNORECASE)
+RE_MD_INLINE_CODE = re.compile(r"(\s|^)(?:`)([\w-]+)(?:`)(\s|$)", flags=re.IGNORECASE)
 
 
 def format_datetime(value: str, format_: str = "%Y-%m-%d") -> str:
@@ -19,7 +19,6 @@ def format_datetime(value: str, format_: str = "%Y-%m-%d") -> str:
 
 def handle_md_inline_code(value: str) -> str:
     """Handle inline code md markup by wrapping contents in ``<code>`` tags."""
-    if "`" not in value or value.count("`") % 2 != 0:
-        return value
-    else:
-        return jinja2.Markup(RE_MD_INLINE_CODE.sub(r"<code>\2</code>", value))
+    if "`" in value and value.count("`") % 2 == 0:
+        value = RE_MD_INLINE_CODE.sub(r"\1<code>\2</code>\3", value)
+    return jinja2.Markup(value)
