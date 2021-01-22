@@ -5,7 +5,7 @@ import re
 import jinja2
 
 
-RE_MD_INLINE_CODE = re.compile(r"(\s|^)(?:`)([\w-]+)(?:`)(\s|$)", flags=re.IGNORECASE)
+RE_MD_INLINE_CODE = re.compile(r"(\W|^)(?:`)([\w-]+)(?:`)(\W|$)", flags=re.IGNORECASE)
 
 
 def format_datetime(value: str, format_: str = "%Y-%m-%d") -> str:
