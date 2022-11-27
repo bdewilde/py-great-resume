@@ -27,21 +27,21 @@ def add_and_parse_args() -> argparse.Namespace:
         default="long",
         choices=("long",),
         help="name of template into which resume data will be inserted, as found in "
-        "the `/templates` directory"
+        "the `/templates` directory",
     )
     parser.add_argument(
         "--validate",
         action="store_true",
         default=False,
         help="flag that specifies whether source json resume data is to be validated "
-        "against a schema, specified internally or via `--schema_url` arg"
+        "against a schema, specified internally or via `--schema_url` arg",
     )
     parser.add_argument(
         "--schema_url",
         type=str,
         default=None,
         help="url of schema against which source json resume data is to be validated; "
-        "NOTE: only used if `--validate` is specified"
+        "NOTE: only used if `--validate` is specified",
     )
     args = parser.parse_args()
     return args
