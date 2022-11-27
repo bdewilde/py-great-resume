@@ -50,7 +50,7 @@ def add_and_parse_args() -> argparse.Namespace:
 if __name__ == "__main__":
     args = add_and_parse_args()
     resume = py_great_resume.Resume(
-        str(args.src_fpath.resolve()),
+        args.src_fpath.resolve(),
         template=args.template,
     )
     if args.validate is True:

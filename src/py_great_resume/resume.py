@@ -1,6 +1,9 @@
+from __future__ import annotations
+
 import io
 import json
 import logging
+import os
 import urllib.request
 from typing import Any, Dict, Optional, Union
 
@@ -31,7 +34,7 @@ class Resume:
     a top-level ``"$schema"`` field. This field is used by :meth:`Resume.validate()`.
     """
 
-    def __init__(self, data_fpath: str, *, template: str = "long"):
+    def __init__(self, data_fpath: str | os.PathLike, *, template: str = "long"):
         self.env = self._init_environment()
         self.template = self.env.get_template(f"{template}.html")
         self.data = self._load_json_data(data_fpath)
@@ -66,19 +69,19 @@ class Resume:
             LOGGER.exception("unable to validate JSON data")
             raise
 
-    def to_html(self, fpath: str):
+    def to_html(self, fpath: str | os.PathLike):
         html_str = self.template.render(self.data)
         with io.open(fpath, mode="wt") as f:
             f.write(html_str)
         LOGGER.info("resume saved as HTML to %s", fpath)
 
-    def to_pdf(self, fpath: str):
+    def to_pdf(self, fpath: str | os.PathLike):
         html_str = self.template.render(self.data)
         html = weasyprint.HTML(string=html_str)
         html.write_pdf(fpath)
         LOGGER.info("resume saved as PDF to %s", fpath)
 
-    def _load_json_data(self, fpath: str) -> Dict[str, Any]:
+    def _load_json_data(self, fpath: str | os.PathLike) -> Dict[str, Any]:
         with io.open(fpath, mode="rt") as f:
             data = json.load(f)
         return data
