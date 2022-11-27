@@ -10,10 +10,10 @@ RE_MD_INLINE_CODE = re.compile(r"(\W|^)(?:`)([\w-]+)(?:`)(\W|$)", flags=re.IGNOR
 def format_datetime(value: str, format_: str = "%Y-%m-%d") -> str:
     """Format ISO-compliant datetime string ``value`` according to ``format_`` spec."""
     try:
-        value = datetime.datetime.fromisoformat(value)
+        dttm = datetime.datetime.fromisoformat(value)
     except ValueError:
-        value = datetime.datetime.strptime(value, "%Y-%m")
-    return value.strftime(format_)
+        dttm = datetime.datetime.strptime(value, "%Y-%m")
+    return dttm.strftime(format_)
 
 
 def handle_md_inline_code(value: str) -> str:
