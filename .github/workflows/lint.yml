@@ -1,0 +1,34 @@
+# install Python and run linting tools over lib code
+# triggered by pushes to main or any pull request
+
+name: lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
+        cache: "pip"
+        cache-dependency-path: "setup.cfg"
+    - name: install dependencies
+      run: |
+        pip install --upgrade pip wheel
+        pip install black flake8
+    - name: check formatting with black
+      uses: psf/black@stable
+      continue-on-error: true
+      with:
+        options: "--check --diff --color --target-version py39"
+        src: "./src"
+    - name: lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        python -m flake8 projects/**/src/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings
+        python -m flake8 projects/**/src/ --count --exit-zero --statistics
