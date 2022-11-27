@@ -153,9 +153,9 @@
                 </ul>
                 {% if basics.profiles %}
                 <ul>
-                {% for profile in basics.profiles %}
+                    {% for profile in basics.profiles %}
                     <li><a href="{{ profile.url }}">{{ profile.network }}</a></li>
-                {% endfor %}
+                    {% endfor %}
                 </ul>
                 {% endif %}
                 {% if basics.summary %}
@@ -191,15 +191,15 @@
                             {% if item.startDate or item.endDate %}
                             <span>
                                 {% if item.startDate %}
-                                <time datetime={{ item.startDate }}>{{ item.startDate | format_datetime("%b %Y") }}</time>
+                                <time datetime={{ item.startDate }}>{{ item.startDate|format_datetime("%b %Y") }}</time>
                                 {% endif %}
                                 {% if item.startDate and item.endDate %}
                                 <span>–</span>
                                 {% endif %}
                                 {% if item.endDate %}
-                                <time datetime={{ item.endDate }}>{{ item.endDate  | format_datetime("%b %Y") }}</time>
+                                <time datetime={{ item.endDate }}>{{ item.endDate|format_datetime("%b %Y") }}</time>
                                 {% endif %}
-                            {% endif %}
+                                {% endif %}
                         </h3>
                         <div>
                             {% if item.url %}
@@ -238,15 +238,15 @@
                             {% if item.startDate or item.endDate %}
                             <span>
                                 {% if item.startDate %}
-                                <time datetime={{ item.startDate }}>{{ item.startDate | format_datetime("%b %Y") }}</time>
+                                <time datetime={{ item.startDate }}>{{ item.startDate|format_datetime("%b %Y") }}</time>
                                 {% endif %}
                                 {% if item.startDate and item.endDate %}
                                 <span>–</span>
                                 {% endif %}
                                 {% if item.endDate %}
-                                <time datetime={{ item.endDate }}>{{ item.endDate | format_datetime("%b %Y") }}</time>
+                                <time datetime={{ item.endDate }}>{{ item.endDate|format_datetime("%b %Y") }}</time>
                                 {% endif %}
-                            {% endif %}
+                                {% endif %}
                         </h3>
                         <div>
                             {% if item.url %}
@@ -289,15 +289,15 @@
                             {% if item.startDate or item.endDate %}
                             <span>
                                 {% if item.startDate %}
-                                <time datetime={{ item.startDate }}>{{ item.startDate | format_datetime("%b %Y") }}</time>
+                                <time datetime={{ item.startDate }}>{{ item.startDate|format_datetime("%b %Y") }}</time>
                                 {% endif %}
                                 {% if item.startDate and item.endDate %}
                                 <span>–</span>
                                 {% endif %}
                                 {% if item.endDate %}
-                                <time datetime={{ item.endDate }}>{{ item.endDate | format_datetime("%b %Y") }}</time>
+                                <time datetime={{ item.endDate }}>{{ item.endDate|format_datetime("%b %Y") }}</time>
                                 {% endif %}
-                            {% endif %}
+                                {% endif %}
                         </h3>
                         {% if item.description %}
                         <p>{{ item.description }}</p>
@@ -326,15 +326,15 @@
                             {% if item.startDate or item.endDate %}
                             <span>
                                 {% if item.startDate %}
-                                <time datetime={{ item.startDate }}>{{ item.startDate | format_datetime("%Y") }}</time>
+                                <time datetime={{ item.startDate }}>{{ item.startDate|format_datetime("%Y") }}</time>
                                 {% endif %}
                                 {% if item.startDate and item.endDate %}
                                 <span>–</span>
                                 {% endif %}
                                 {% if item.endDate %}
-                                <time datetime={{ item.endDate }}>{{ item.endDate | format_datetime("%Y") }}</time>
+                                <time datetime={{ item.endDate }}>{{ item.endDate|format_datetime("%Y") }}</time>
                                 {% endif %}
-                            {% endif %}
+                                {% endif %}
                         </h3>
                         <div>
                             {% if item.url %}
@@ -370,7 +370,9 @@
                         <span>{{ item.publisher }}</span>
                         {% endif %}
                         {% if item.releaseDate %}
-                        <span><time datetime={{ item.releaseDate }}>{{ item.releaseDate | format_datetime("%Y") }}</time></span>
+                        <span>
+                            <time datetime={{ item.releaseDate }}>{{ item.releaseDate|format_datetime("%Y")}}</time>
+                        </span>
                         {% endif %}
                         {% if item.url %}
                         <span>(<a href="{{ item.url }}">link</a>)</span>
@@ -392,7 +394,7 @@
                     <li>
                         <span class="award-name">{{ item.title }}</span>
                         {% if item.date %}
-                        <span><time datetime={{ item.date }}>{{ item.date | format_datetime("%Y") }}</time></span>
+                        <span><time datetime={{ item.date }}>{{ item.date|format_datetime("%Y") }}</time></span>
                         {% endif %}
                         {% if item.awarder %}
                         <span>{{ item.awarder }}</span>
@@ -408,4 +410,5 @@
 
         </div>
     </body>
+
 </html>
