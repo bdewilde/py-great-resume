@@ -242,13 +242,13 @@
                             {% if item.startDate or item.endDate %}
                             <span>
                                 {% if item.startDate %}
-                                <time datetime={{ item.startDate }}>{{ item.startDate|format_datetime("%b %Y") }}</time>
+                                <time datetime={{ item.startDate }}>{{ item.startDate|format_datetime("%Y") }}</time>
                                 {% endif %}
                                 {% if item.startDate and item.endDate %}
                                 <span>–</span>
                                 {% endif %}
                                 {% if item.endDate %}
-                                <time datetime={{ item.endDate }}>{{ item.endDate|format_datetime("%b %Y") }}</time>
+                                <time datetime={{ item.endDate }}>{{ item.endDate|format_datetime("%Y") }}</time>
                                 {% endif %}
                                 {% endif %}
                         </h3>
