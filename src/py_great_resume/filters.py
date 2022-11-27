@@ -2,7 +2,7 @@
 import datetime
 import re
 
-import jinja2
+from markupsafe import Markup
 
 
 RE_MD_INLINE_CODE = re.compile(r"(\W|^)(?:`)([\w-]+)(?:`)(\W|$)", flags=re.IGNORECASE)
@@ -21,4 +21,4 @@ def handle_md_inline_code(value: str) -> str:
     """Handle inline code md markup by wrapping contents in ``<code>`` tags."""
     if "`" in value and value.count("`") % 2 == 0:
         value = RE_MD_INLINE_CODE.sub(r"\1<code>\2</code>\3", value)
-    return jinja2.Markup(value)
+    return Markup(value)
