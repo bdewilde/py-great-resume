@@ -8,8 +8,7 @@ import jinja2
 import jsonschema
 import weasyprint
 
-from py_great_resume import filters
-
+from . import filters
 
 LOGGER = logging.getLogger(__name__)
 

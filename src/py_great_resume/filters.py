@@ -4,7 +4,6 @@ import re
 
 from markupsafe import Markup
 
-
 RE_MD_INLINE_CODE = re.compile(r"(\W|^)(?:`)([\w-]+)(?:`)(\W|$)", flags=re.IGNORECASE)
 
 
