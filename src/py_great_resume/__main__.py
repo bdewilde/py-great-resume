@@ -1,7 +1,22 @@
 import argparse
 import pathlib
+import sys
 
 import py_great_resume
+
+
+def main():
+    args = add_and_parse_args()
+    resume = py_great_resume.Resume(
+        args.src_fpath.resolve(),
+        template=args.template,
+    )
+    if args.validate is True:
+        resume.validate(schema=args.schema_url)
+    if args.tgt_fpath.suffix == ".html":
+        resume.to_html(str(args.tgt_fpath.resolve()))
+    if args.tgt_fpath.suffix == ".pdf":
+        resume.to_pdf(str(args.tgt_fpath.resolve()))
 
 
 def add_and_parse_args() -> argparse.Namespace:
@@ -48,14 +63,4 @@ def add_and_parse_args() -> argparse.Namespace:
 
 
 if __name__ == "__main__":
-    args = add_and_parse_args()
-    resume = py_great_resume.Resume(
-        args.src_fpath.resolve(),
-        template=args.template,
-    )
-    if args.validate is True:
-        resume.validate(schema=args.schema_url)
-    if args.tgt_fpath.suffix == ".html":
-        resume.to_html(str(args.tgt_fpath.resolve()))
-    if args.tgt_fpath.suffix == ".pdf":
-        resume.to_pdf(str(args.tgt_fpath.resolve()))
+    sys.exit(main())
