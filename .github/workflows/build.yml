@@ -3,6 +3,7 @@ name: build
 on:
   push:
     branches: [ main ]
+  pull_request:
   schedule:  # run weekly
     - cron: "0 12 * * 0"
 
@@ -11,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: ["3.9", "3.10"]
         os: [macos-latest, ubuntu-latest]  # windows-latest
         include:
           - os: macos-latest
@@ -20,24 +21,15 @@ jobs:
             CXX: clang++
 
     steps:
-    - uses: actions/checkout@v2
-    - name: set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+    - uses: actions/checkout@v3
     - name: install homebrew dependencies
       run: ${{ matrix.INSTALL_BREW_DEPS }}
-    - name: get pip cache dir
-      id: pip-cache
-      run: |
-        echo "::set-output name=dir::$(pip cache dir)"
-    - name: set up pip cache
-      uses: actions/cache@v2
+    - name: set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
       with:
-        path: ${{ steps.pip-cache.outputs.dir }}
-        key: ${{ matrix.os }}-pip-${{ hashFiles('setup.cfg') }}
-        restore-keys: |
-          ${{ matrix.os }}-pip-
+        python-version: ${{ matrix.python-version }}
+        cache: "pip"
+        cache-dependency-path: setup.cfg
     - name: install package and dependencies
       run: |
         python -m pip install --upgrade pip
